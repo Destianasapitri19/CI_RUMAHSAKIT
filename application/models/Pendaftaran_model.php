@@ -11,24 +11,71 @@ class Pendaftaran_model extends CI_Model {
         return $this->db->get('pendaftaran')->result();
     }
 
+    // Ambil pendaftaran berdasarkan user yang login (untuk pasien melihat riwayat)
     public function get_by_user($user_id) {
+        $this->db->select('pendaftaran.*, dokter.nama_dokter, dokter.spesialis');
+        $this->db->from('pendaftaran');
+        $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
         $this->db->where('user_id', $user_id);
-        return $this->db->get('pendaftaran')->result();
+        return $this->db->get()->result();
     }
 
-    // Ambil semua pendaftaran + detail pasien dan dokter
-public function get_all_with_detail() {
-    $this->db->select('pendaftaran.*, users.nama as nama_pasien, dokter.nama_dokter, dokter.spesialis');
-    $this->db->from('pendaftaran');
-    $this->db->join('users', 'users.id = pendaftaran.user_id');
-    $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
-    return $this->db->get()->result();
-}
+    // Ambil semua pendaftaran (untuk admin)
+    public function get_all_with_detail() {
+        $this->db->select('pendaftaran.*, dokter.nama_dokter, dokter.spesialis');
+        $this->db->from('pendaftaran');
+        $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
+        return $this->db->get()->result();
+    }
 
-// Ubah status pendaftaran (diterima / ditolak)
-public function update_status($id, $status) {
-    $this->db->where('id', $id);
-    return $this->db->update('pendaftaran', ['status' => $status]);
-}
+    // Ubah status pendaftaran (admin)
+    public function update_status($id, $status) {
+        $this->db->where('id', $id);
+        return $this->db->update('pendaftaran', ['status' => $status]);
+    }
 
+    // Ambil semua pasien yang statusnya sudah diterima
+    public function get_terdaftar() {
+        $this->db->select('pendaftaran.*, dokter.nama_dokter, dokter.spesialis');
+        $this->db->from('pendaftaran');
+        $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
+        $this->db->where('pendaftaran.status', 'diterima');
+        return $this->db->get()->result();
+    }
+
+    public function count_all() {
+        return $this->db->count_all('pendaftaran');
+    }
+
+    public function count_by_status($status) {
+        return $this->db->where('status', $status)->count_all_results('pendaftaran');
+    }
+
+    public function get_by_status($status) {
+        $this->db->select('pendaftaran.*, dokter.nama_dokter, dokter.spesialis');
+        $this->db->from('pendaftaran');
+        $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
+        $this->db->where('status', $status);
+        return $this->db->get()->result();
+    }
+
+    // CRUD Pasien
+    public function get_all_pasien() {
+        $this->db->where('role', 'pasien');
+        return $this->db->get('users')->result();
+    }
+
+    public function get_user_by_id($id) {
+        return $this->db->get_where('users', ['id' => $id])->row();
+    }
+
+    public function update_user($id, $data) {
+        $this->db->where('id', $id);
+        return $this->db->update('users', $data);
+    }
+
+    public function delete_user($id) {
+        $this->db->where('id', $id);
+        return $this->db->delete('users');
+    }
 }

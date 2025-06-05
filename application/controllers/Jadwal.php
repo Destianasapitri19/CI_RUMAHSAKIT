@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Jadwal extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -12,13 +12,9 @@ class Dashboard extends CI_Controller {
     }
 
     public function index() {
-        $data['total_pendaftaran'] = $this->Pendaftaran_model->count_all();
-        $data['diterima'] = $this->Pendaftaran_model->count_by_status('diterima');
-        $data['ditolak'] = $this->Pendaftaran_model->count_by_status('ditolak');
-        $data['proses'] = $this->Pendaftaran_model->count_by_status('proses');
-
+        $data['jadwal'] = $this->Pendaftaran_model->get_all_with_detail();
         $this->load->view('templates/header');
-        $this->load->view('dashboard', $data);
+        $this->load->view('jadwal/index', $data);
         $this->load->view('templates/footer');
     }
 }

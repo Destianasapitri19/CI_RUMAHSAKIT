@@ -70,7 +70,7 @@ class Auth extends CI_Controller {
                 redirect('dashboard');
                 break;
             case 'pasien': // sesuaikan dengan role di DB
-                redirect('dashboard_user');
+                redirect('pendaftaran');
                 break;
             default:
                 redirect('auth/login');

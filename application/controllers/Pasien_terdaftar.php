@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Pasien_terdaftar extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -9,16 +9,15 @@ class Dashboard extends CI_Controller {
             redirect('auth/login');
         }
         $this->load->model('Pendaftaran_model');
+        $this->load->model('User_model');
+        $this->load->model('Dokter_model');
     }
 
     public function index() {
-        $data['total_pendaftaran'] = $this->Pendaftaran_model->count_all();
-        $data['diterima'] = $this->Pendaftaran_model->count_by_status('diterima');
-        $data['ditolak'] = $this->Pendaftaran_model->count_by_status('ditolak');
-        $data['proses'] = $this->Pendaftaran_model->count_by_status('proses');
-
+        // Ambil hanya pasien dengan status 'diterima'
+        $data['pasien'] = $this->Pendaftaran_model->get_terdaftar();
         $this->load->view('templates/header');
-        $this->load->view('dashboard', $data);
+        $this->load->view('pasien_terdaftar/index', $data);
         $this->load->view('templates/footer');
     }
 }

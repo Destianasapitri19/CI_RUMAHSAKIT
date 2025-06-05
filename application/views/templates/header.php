@@ -228,38 +228,73 @@
         </div>
       </div>
 
-<!-- Sidebar Menu -->
 <nav class="mt-2">
   <?php $level = $this->session->userdata('role'); ?>
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
 
-    <!-- Dashboard -->
-    <li class="nav-item">
-      <a href="<?= base_url('dashboard'); ?>" class="nav-link">
-        <i class="nav-icon fas fa-tachometer-alt"></i>
-        <p>Dashboard</p>
-      </a>
-    </li>
-
+    <!-- Menu untuk ADMIN -->
     <?php if ($level == 'admin'): ?>
-    <!-- Pendaftaran Pasien -->
-    <li class="nav-item">
-      <a href="<?= base_url('pendaftaran_admin'); ?>" class="nav-link">
-        <i class="nav-icon fas fa-file-medical"></i>
-        <p>Pendaftaran Pasien</p>
-      </a>
-    </li>
-
-    <li class="nav-item">
-  <a href="<?= base_url('laporan'); ?>" class="nav-link">
-    <i class="nav-icon fas fa-print"></i>
-    <p>Cetak Laporan</p>
+      <li class="nav-item">
+        <a href="<?= base_url('dashboard'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <p>Dashboard</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= base_url('pendaftaran_admin'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-file-medical"></i>
+          <p>Pendaftaran Pasien</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= base_url('pasien_terdaftar'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-user-check"></i>
+          <p>Pasien Terdaftar</p>
+        </a>
+      </li>
+      <?php if ($level == 'admin'): ?>
+<li class="nav-item">
+  <a href="<?= base_url('pasien_admin'); ?>" class="nav-link">
+    <i class="nav-icon fas fa-users"></i>
+    <p>Data Pasien</p>
   </a>
 </li>
+<?php endif; ?>
+<?php if ($level == 'admin'): ?>
+<li class="nav-item">
+  <a href="<?= base_url('jadwal'); ?>" class="nav-link">
+    <i class="nav-icon fas fa-calendar-alt"></i>
+    <p>Jadwal Kunjungan</p>
+  </a>
+</li>
+<?php endif; ?>
 
+
+      <li class="nav-item">
+        <a href="<?= base_url('laporan'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-print"></i>
+          <p>Laporan</p>
+        </a>
+      </li>
     <?php endif; ?>
 
-    <!-- Logout -->
+    <!-- Menu untuk PASIEN -->
+    <?php if ($level == 'pasien'): ?>
+      <li class="nav-item">
+        <a href="<?= base_url('pendaftaran'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-edit"></i>
+          <p>Form Pendaftaran</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= base_url('riwayat'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-history"></i>
+          <p>Riwayat Pendaftaran</p>
+        </a>
+      </li>
+    <?php endif; ?>
+
+    <!-- Menu Logout untuk Semua -->
     <li class="nav-item">
       <a href="<?= base_url('auth/logout'); ?>" class="nav-link">
         <i class="nav-icon fas fa-sign-out-alt"></i>
@@ -269,6 +304,7 @@
 
   </ul>
 </nav>
+
 
 
               <!-- <li class="nav-item">
