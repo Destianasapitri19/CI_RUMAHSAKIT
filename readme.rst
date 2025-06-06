@@ -70,12 +70,18 @@ Acknowledgement
 The CodeIgniter team would like to thank EllisLab, all the
 contributors to the CodeIgniter project and you, the CodeIgniter user.
 
+***************
 Nama Akses
+***************
+
 ***************
 admin
 username : admin
 password : admin123
 ***************
+
+***************
 pasien
 username : pasien1, pasien2, dst
 password : pasien123
+***************
