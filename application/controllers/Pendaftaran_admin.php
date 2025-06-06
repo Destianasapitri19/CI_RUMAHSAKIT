@@ -5,6 +5,7 @@ class Pendaftaran_admin extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
+        
         if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 'admin') {
             redirect('auth/login');
         }
@@ -13,6 +14,7 @@ class Pendaftaran_admin extends CI_Controller {
 
     public function index() {
         $status = $this->input->get('status');
+
         if ($status) {
             $data['pendaftaran'] = $this->Pendaftaran_model->get_by_status($status);
         } else {
@@ -25,15 +27,14 @@ class Pendaftaran_admin extends CI_Controller {
     }
 
     public function setujui($id) {
-    $this->Pendaftaran_model->update_status($id, 'diterima');
-    $this->session->set_flashdata('success', 'Pendaftaran disetujui.');
-    redirect('pendaftaran_admin');
-}
+        $this->Pendaftaran_model->update_status($id, 'diterima');
+        $this->session->set_flashdata('success', 'Pendaftaran disetujui.');
+        redirect('pendaftaran_admin');
+    }
 
-public function tolak($id) {
-    $this->Pendaftaran_model->update_status($id, 'ditolak');
-    $this->session->set_flashdata('success', 'Pendaftaran ditolak.');
-    redirect('pendaftaran_admin');
-}
-
+    public function tolak($id) {
+        $this->Pendaftaran_model->update_status($id, 'ditolak');
+        $this->session->set_flashdata('success', 'Pendaftaran ditolak.');
+        redirect('pendaftaran_admin');
+    }
 }

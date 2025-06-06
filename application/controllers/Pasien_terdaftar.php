@@ -14,7 +14,7 @@ class Pasien_terdaftar extends CI_Controller {
     }
 
     public function index() {
-        // Ambil hanya pasien dengan status 'diterima'
+        
         $data['pasien'] = $this->Pendaftaran_model->get_terdaftar();
         $this->load->view('templates/header');
         $this->load->view('pasien_terdaftar/index', $data);

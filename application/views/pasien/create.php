@@ -1,13 +1,21 @@
 <div class="content-wrapper">
+  <!-- Header -->
   <section class="content-header">
-    <div class="container-fluid"><h1>Tambah Pasien Sekaligus Pendaftaran</h1></div>
+    <div class="container-fluid">
+      <h1>Tambah Pasien Sekaligus Pendaftaran</h1>
+    </div>
   </section>
 
+  <!-- Form Content -->
   <section class="content">
     <div class="card">
       <div class="card-body">
+
+        <!-- Tampilkan validasi error -->
         <?= validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+
         <form action="<?= base_url('pasien_admin/store'); ?>" method="post">
+          
           <h5>Akun Pasien</h5>
           <div class="form-group">
             <label>Nama Lengkap</label>
@@ -22,7 +30,9 @@
             <input type="text" name="password" class="form-control" required>
           </div>
 
-          <hr><h5>Data Pendaftaran</h5>
+          <hr>
+
+          <h5>Data Pendaftaran</h5>
           <div class="form-group">
             <label>Tanggal Lahir</label>
             <input type="date" name="tgl_lahir" class="form-control" required>
@@ -50,17 +60,18 @@
           <div class="form-group">
             <label>Dokter</label>
             <select name="dokter_id" class="form-control" required>
-  <option value="">-- Pilih Dokter --</option>
-  <?php foreach($dokter as $d): ?>
-    <option value="<?= $d->id ?>"><?= $d->nama_dokter ?> (<?= $d->spesialis ?>)</option>
-  <?php endforeach; ?>
-</select>
-
+              <option value="">-- Pilih Dokter --</option>
+              <?php foreach($dokter as $d): ?>
+                <option value="<?= $d->id ?>"><?= $d->nama_dokter ?> (<?= $d->spesialis ?>)</option>
+              <?php endforeach; ?>
+            </select>
           </div>
 
+          <!-- Tombol -->
           <button type="submit" class="btn btn-primary">Simpan</button>
           <a href="<?= base_url('pasien_admin'); ?>" class="btn btn-secondary">Kembali</a>
         </form>
+
       </div>
     </div>
   </section>

@@ -32,7 +32,7 @@ class Auth extends CI_Controller {
                 'username' => $this->input->post('username'),
                 'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
                 'role'     => $this->input->post('role'),
-                'nama'     => $this->input->post('nama') // opsional, tambahkan di form kalau mau
+                'nama'     => $this->input->post('nama') 
             ];
 
             if ($this->User_model->insert_user($data)) {
@@ -51,17 +51,28 @@ class Auth extends CI_Controller {
         $user     = $this->User_model->check_user($username, $password);
 
         if ($user) {
-            $this->session->set_userdata([
-                'user_id'  => $user->id,
-                'username' => $user->username,
-                'role'     => $user->role,
-                'logged_in'=> TRUE
-            ]);
-            $this->redirect_by_role($user->role);
-        } else {
-            $this->session->set_flashdata('error', 'Username atau Password salah.');
-            redirect('auth/login');
+    $this->session->set_userdata([
+        'user_id'  => $user->id,
+        'username' => $user->username,
+        'role'     => $user->role,
+        'logged_in'=> TRUE
+    ]);
+
+    // ⬇ Tambahkan ini untuk ambil nama dari pendaftaran
+    if ($user->role == 'pasien') {
+        $this->load->model('Pendaftaran_model');
+        $daftar = $this->Pendaftaran_model->get_latest_by_user($user->id);
+        if ($daftar) {
+            $this->session->set_userdata('nama_pasien', $daftar->nama);
         }
+    }
+
+    $this->redirect_by_role($user->role);
+} else {
+    $this->session->set_flashdata('error', 'Username atau Password salah.');
+    redirect('auth/login');
+}
+
     }
 
     private function redirect_by_role($role){
@@ -69,7 +80,7 @@ class Auth extends CI_Controller {
             case 'admin':
                 redirect('dashboard');
                 break;
-            case 'pasien': // sesuaikan dengan role di DB
+            case 'pasien': 
                 redirect('pendaftaran');
                 break;
             default:

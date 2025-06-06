@@ -33,6 +33,14 @@ class Pasien_admin extends CI_Controller {
         $this->User_model->update_user($id, $data);
         $this->session->set_flashdata('success', 'Data pasien berhasil diperbarui.');
         redirect('pasien_admin');
+        $current_user = $this->User_model->get_user_by_id($id);
+
+if ($this->input->post('username') != $current_user->username) {
+    $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+} else {
+    $this->form_validation->set_rules('username', 'Username', 'required');
+}
+
     }
 
     public function delete($id) {
@@ -69,7 +77,7 @@ public function store() {
         $this->load->view('pasien/create', $data);
         $this->load->view('templates/footer');
     } else {
-        // 1. Simpan ke tabel users
+        
         $user_data = [
             'nama'     => $this->input->post('nama'),
             'username' => $this->input->post('username'),
@@ -77,9 +85,9 @@ public function store() {
             'role'     => 'pasien'
         ];
         $this->User_model->insert_user($user_data);
-        $user_id = $this->db->insert_id(); // ambil ID user baru
+        $user_id = $this->db->insert_id(); 
 
-        // 2. Simpan ke tabel pendaftaran
+       
         $pendaftaran = [
             'user_id'           => $user_id,
             'nama'              => $this->input->post('nama'),
@@ -99,6 +107,7 @@ public function store() {
         redirect('pasien_admin');
     }
 }
+
 
 
 }

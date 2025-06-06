@@ -1,9 +1,12 @@
 <div class="content-wrapper">
   <section class="content-header">
-    <div class="container-fluid">
-      <h1>Laporan Pendaftaran Pasien</h1>
-      <button onclick="window.print()" class="btn btn-primary btn-sm mt-2"><i class="fas fa-print"></i> Cetak</button>
-    </div>
+    <div class="d-flex justify-content-between mb-3">
+  <h4>Laporan Pendaftaran Pasien</h4>
+  <a href="#" onclick="window.print()" class="btn btn-danger">
+    <i class="fas fa-file-pdf"></i> Cetak PDF
+  </a>
+</div>
+
   </section>
 
   <section class="content">
