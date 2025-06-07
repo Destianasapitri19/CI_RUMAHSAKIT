@@ -34,5 +34,4 @@ public function update_user($id, $data) {
     return $this->db->update('users', $data);
 }
 
-
 }

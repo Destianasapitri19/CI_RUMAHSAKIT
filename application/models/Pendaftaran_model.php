@@ -32,12 +32,14 @@ class Pendaftaran_model extends CI_Model {
     }
 
     public function get_terdaftar() {
-        $this->db->select('pendaftaran.*, dokter.nama_dokter, dokter.spesialis');
-        $this->db->from('pendaftaran');
-        $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
-        $this->db->where('pendaftaran.status', 'diterima');
-        return $this->db->get()->result();
-    }
+    $this->db->select('pendaftaran.*, users.nama, dokter.nama_dokter, dokter.spesialis');
+    $this->db->from('pendaftaran');
+    $this->db->join('users', 'users.id = pendaftaran.user_id');
+    $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
+    $this->db->where('pendaftaran.status', 'diterima');
+    return $this->db->get()->result();
+}
+
 
     public function count_all() {
         return $this->db->count_all('pendaftaran');
@@ -80,5 +82,24 @@ class Pendaftaran_model extends CI_Model {
     $this->db->limit(1);
     return $this->db->get('pendaftaran')->row();
 }
+public function get_all_pasien_detail() {
+    $this->db->select('pendaftaran.*, users.nama, users.username, dokter.nama_dokter, dokter.spesialis');
+    $this->db->from('pendaftaran');
+    $this->db->join('users', 'users.id = pendaftaran.user_id');
+    $this->db->join('dokter', 'dokter.id = pendaftaran.dokter_id');
+    return $this->db->get()->result();
+}
+public function get_by_id($id) {
+    $this->db->select('pendaftaran.*, users.nama, users.username');
+    $this->db->from('pendaftaran');
+    $this->db->join('users', 'users.id = pendaftaran.user_id');
+    $this->db->where('pendaftaran.id', $id);
+    return $this->db->get()->row();
+}
+public function update($id, $data) {
+    $this->db->where('id', $id);
+    return $this->db->update('pendaftaran', $data);
+}
+
 
 }

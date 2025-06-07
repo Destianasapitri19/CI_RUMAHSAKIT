@@ -12,9 +12,12 @@ class Jadwal extends CI_Controller {
     }
 
     public function index() {
-        $data['jadwal'] = $this->Pendaftaran_model->get_all_with_detail();
-        $this->load->view('templates/header');
-        $this->load->view('jadwal/index', $data);
-        $this->load->view('templates/footer');
-    }
+    $this->load->model('Pendaftaran_model');
+    $data['jadwal'] = $this->Pendaftaran_model->get_by_status('diterima');
+
+    $this->load->view('templates/header');
+    $this->load->view('jadwal/index', $data);
+    $this->load->view('templates/footer');
+}
+
 }

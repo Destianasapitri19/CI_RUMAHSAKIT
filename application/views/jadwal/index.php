@@ -25,7 +25,7 @@
                 <td><?= $j->nama ?></td>
                 <td><?= $j->nama_dokter ?> (<?= $j->spesialis ?>)</td>
                 <td><?= $j->tanggal_kunjungan ?> <?= $j->jam_kunjungan ?></td>
-                <td><?= ucfirst($j->status) ?></td>
+                <td><span class="badge badge-success"><?= ucfirst($j->status) ?></span></td>
               </tr>
             <?php endforeach; ?>
           </tbody>

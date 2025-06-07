@@ -2,10 +2,19 @@
   <section class="content-header">
     <div class="d-flex justify-content-between mb-3">
   <h4>Laporan Pendaftaran Pasien</h4>
-  <a href="#" onclick="window.print()" class="btn btn-danger">
-    <i class="fas fa-file-pdf"></i> Cetak PDF
-  </a>
+  <div>
+    <a href="<?= base_url('laporan/cetak_pdf'); ?>" class="btn btn-danger mr-2">
+      <i class="fas fa-file-pdf"></i> PDF
+    </a>
+    <a href="<?= base_url('laporan/unduh_csv'); ?>" class="btn btn-success mr-2">
+      <i class="fas fa-file-csv"></i> CSV
+    </a>
+    <a href="#" onclick="window.print()" class="btn btn-secondary">
+      <i class="fas fa-print"></i> Print
+    </a>
+  </div>
 </div>
+
 
   </section>
 

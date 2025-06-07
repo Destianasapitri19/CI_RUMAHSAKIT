@@ -29,7 +29,7 @@
           <div class="small-box bg-success">
             <div class="inner">
               <h3><?= $diterima ?></h3>
-              <p>Diterima</p>
+              <p>Pasien Diterima</p>
             </div>
             <div class="icon">
               <i class="fas fa-check-circle"></i>
@@ -44,7 +44,7 @@
           <div class="small-box bg-danger">
             <div class="inner">
               <h3><?= $ditolak ?></h3>
-              <p>Ditolak</p>
+              <p>Pasien Ditolak</p>
             </div>
             <div class="icon">
               <i class="fas fa-times-circle"></i>
@@ -59,7 +59,7 @@
           <div class="small-box bg-warning">
             <div class="inner">
               <h3><?= $proses ?></h3>
-              <p>Dalam Proses</p>
+              <p>Sedang Dalam Proses</p>
             </div>
             <div class="icon">
               <i class="fas fa-spinner"></i>

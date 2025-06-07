@@ -54,7 +54,8 @@ class Pendaftaran extends CI_Controller {
                 'status'            => 'proses'
             ];
 
-            $this->Pendaftaran_model->insert($data);
+             $this->load->model('User_model');
+        $this->User_model->update_user($user_id, ['nama' => $nama]);
             $this->session->set_flashdata('success', 'Pendaftaran berhasil dikirim.');
             redirect('pendaftaran');
         }

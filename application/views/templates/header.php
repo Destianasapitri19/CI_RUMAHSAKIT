@@ -240,12 +240,6 @@
           <p>Pendaftaran Pasien</p>
         </a>
       </li>
-      <li class="nav-item">
-        <a href="<?= base_url('pasien_terdaftar'); ?>" class="nav-link">
-          <i class="nav-icon fas fa-user-check"></i>
-          <p>Pasien Terdaftar</p>
-        </a>
-      </li>
       <?php if ($level == 'admin'): ?>
 <li class="nav-item">
   <a href="<?= base_url('pasien_admin'); ?>" class="nav-link">
