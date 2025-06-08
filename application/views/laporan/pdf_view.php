@@ -1,25 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
     <title>Laporan Pendaftaran Pasien</title>
     <style>
         body { font-family: Arial, sans-serif; font-size: 12px; }
-        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-        table, th, td { border: 1px solid black; }
-        th, td { padding: 6px; text-align: left; }
-        h3 { text-align: center; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { border: 1px solid #000; padding: 5px; text-align: left; }
+        th { background-color: #f2f2f2; }
     </style>
 </head>
 <body>
-
-    <h3>LAPORAN PENDAFTARAN PASIEN</h3>
-
+    <h2 style="text-align:center;">Laporan Pendaftaran Pasien</h2>
     <table>
         <thead>
             <tr>
                 <th>No</th>
-                <th>Nama Pasien</th>
+                <th>Nama</th>
                 <th>Tgl Lahir</th>
                 <th>Alamat</th>
                 <th>No HP</th>
@@ -45,6 +41,5 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-
 </body>
 </html>
