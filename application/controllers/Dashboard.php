@@ -8,17 +8,18 @@ class Dashboard extends CI_Controller {
         if (!$this->session->userdata('logged_in') || $this->session->userdata('role') != 'admin') {
             redirect('auth/login');
         }
+
         $this->load->model('Pendaftaran_model');
     }
 
     public function index() {
         $data['total_pendaftaran'] = $this->Pendaftaran_model->count_all();
-        $data['diterima'] = $this->Pendaftaran_model->count_by_status('diterima');
-        $data['ditolak'] = $this->Pendaftaran_model->count_by_status('ditolak');
-        $data['proses'] = $this->Pendaftaran_model->count_by_status('proses');
+        $data['total_diterima']    = $this->Pendaftaran_model->count_by_status('diterima');
+        $data['total_ditolak']     = $this->Pendaftaran_model->count_by_status('ditolak');
+        $data['total_proses']      = $this->Pendaftaran_model->count_by_status('proses');
 
         $this->load->view('templates/header');
-        $this->load->view('dashboard', $data);
+        $this->load->view('dashboard', $data); // nama view kamu adalah 'Dashboard.php'
         $this->load->view('templates/footer');
     }
 }

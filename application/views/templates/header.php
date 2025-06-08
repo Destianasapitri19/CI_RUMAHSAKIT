@@ -202,35 +202,30 @@
     <a href="<?= base_url(); ?>" class="brand-link bg-primary text-white text-center" style="height: 48px; padding: 10px 10px;">
   <span class="brand-text font-weight-bold" style="font-size: 16px;">RS Sehat Sentosa</span>
 </a>
-
+ <!-- Ambil role -->
+  <?php $level = $this->session->userdata('role'); ?>
 
    <!-- Sidebar user panel -->
-<div class="user-panel mt-3 pb-3 mb-3 d-flex align-items-center">
+<div class="user-panel mt-3 pb-3 mb-3 d-flex">
   <div class="image">
     <img src="<?= base_url('assets/adminlte/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
   </div>
-  <div class="info ml-2">
-    <?php
-      $nama_pasien = $this->session->userdata('nama_pasien');
-      $username    = $this->session->userdata('username');
-      $nama_tampil = $nama_pasien ? $nama_pasien : $this->session->userdata('nama');
-    ?>
-    <a href="#" class="d-block" style="white-space: normal;">
-      <?= htmlspecialchars($nama_tampil); ?><br>
-      <small>(Akun: <?= htmlspecialchars($username); ?>)</small>
-    </a>
+  <div class="info">
+    <a href="#" class="d-block"><?= $this->session->userdata('username'); ?></a>
+    <small class="text-muted">(Akun: <?= $this->session->userdata('role'); ?>)</small>
   </div>
 </div>
 
+
+    <?php $level = $this->session->userdata('role'); ?>
 <nav class="mt-2">
-  <?php $level = $this->session->userdata('role'); ?>
   <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu">
 
     <!-- Menu untuk ADMIN -->
     <?php if ($level == 'admin'): ?>
       <li class="nav-item">
         <a href="<?= base_url('dashboard'); ?>" class="nav-link">
-          <i class="nav-icon fas fa-tachometer-alt"></i>
+          <i class="nav-icon fas fa-home"></i>
           <p>Dashboard</p>
         </a>
       </li>
@@ -240,24 +235,18 @@
           <p>Pendaftaran Pasien</p>
         </a>
       </li>
-      <?php if ($level == 'admin'): ?>
-<li class="nav-item">
-  <a href="<?= base_url('pasien_admin'); ?>" class="nav-link">
-    <i class="nav-icon fas fa-users"></i>
-    <p>Data Pasien</p>
-  </a>
-</li>
-<?php endif; ?>
-<?php if ($level == 'admin'): ?>
-<li class="nav-item">
-  <a href="<?= base_url('jadwal'); ?>" class="nav-link">
-    <i class="nav-icon fas fa-calendar-alt"></i>
-    <p>Jadwal Kunjungan</p>
-  </a>
-</li>
-<?php endif; ?>
-
-
+      <li class="nav-item">
+        <a href="<?= base_url('pasien_admin'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-users"></i>
+          <p>Data Pasien</p>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="<?= base_url('jadwal'); ?>" class="nav-link">
+          <i class="nav-icon fas fa-calendar-alt"></i>
+          <p>Jadwal Kunjungan</p>
+        </a>
+      </li>
       <li class="nav-item">
         <a href="<?= base_url('laporan'); ?>" class="nav-link">
           <i class="nav-icon fas fa-print"></i>

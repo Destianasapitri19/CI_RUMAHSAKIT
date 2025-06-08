@@ -25,10 +25,10 @@
 
       <!-- Diterima -->
       <div class="col-lg-3 col-6">
-        <a href="<?= base_url('pasien_terdaftar'); ?>" style="text-decoration: none;">
+        <a href="<?= base_url('pendaftaran_admin?status=diterima'); ?>" style="text-decoration: none;">
           <div class="small-box bg-success">
             <div class="inner">
-              <h3><?= $diterima ?></h3>
+              <h3><?= $total_diterima ?></h3>
               <p>Pasien Diterima</p>
             </div>
             <div class="icon">
@@ -43,7 +43,7 @@
         <a href="<?= base_url('pendaftaran_admin?status=ditolak'); ?>" style="text-decoration: none;">
           <div class="small-box bg-danger">
             <div class="inner">
-              <h3><?= $ditolak ?></h3>
+              <h3><?= $total_ditolak ?></h3>
               <p>Pasien Ditolak</p>
             </div>
             <div class="icon">
@@ -58,7 +58,7 @@
         <a href="<?= base_url('pendaftaran_admin?status=proses'); ?>" style="text-decoration: none;">
           <div class="small-box bg-warning">
             <div class="inner">
-              <h3><?= $proses ?></h3>
+              <h3><?= $total_proses ?></h3>
               <p>Sedang Dalam Proses</p>
             </div>
             <div class="icon">
