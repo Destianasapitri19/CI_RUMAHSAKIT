@@ -205,16 +205,21 @@
  <!-- Ambil role -->
   <?php $level = $this->session->userdata('role'); ?>
 
-   <!-- Sidebar user panel -->
-<div class="user-panel mt-3 pb-3 mb-3 d-flex">
+  <div class="user-panel mt-3 pb-3 mb-3 d-flex">
   <div class="image">
     <img src="<?= base_url('assets/adminlte/dist/img/user2-160x160.jpg'); ?>" class="img-circle elevation-2" alt="User Image">
   </div>
   <div class="info">
-    <a href="#" class="d-block"><?= $this->session->userdata('username'); ?></a>
-    <small class="text-muted">(Akun: <?= $this->session->userdata('role'); ?>)</small>
+    <?php
+      $nama = $this->session->userdata('nama_pasien');
+      if (!$nama) {
+          $nama = $this->session->userdata('username');
+      }
+    ?>
+    <a href="#" class="d-block"><?= htmlspecialchars($nama); ?></a>
   </div>
 </div>
+
 
 
     <?php $level = $this->session->userdata('role'); ?>

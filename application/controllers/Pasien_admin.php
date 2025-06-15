@@ -86,21 +86,34 @@ class Pasien_admin extends CI_Controller {
     }
 
     public function update($id) {
-        $data = [
-            'nama'              => $this->input->post('nama'),
-            'tgl_lahir'         => $this->input->post('tgl_lahir'),
-            'alamat'            => $this->input->post('alamat'),
-            'no_hp'             => $this->input->post('no_hp'),
-            'keluhan'           => $this->input->post('keluhan'),
-            'tanggal_kunjungan' => $this->input->post('tanggal_kunjungan'),
-            'jam_kunjungan'     => $this->input->post('jam_kunjungan'),
-            'dokter_id'         => $this->input->post('dokter_id')
-        ];
+    $nama = $this->input->post('nama');
 
-        $this->Pendaftaran_model->update($id, $data);
-        $this->session->set_flashdata('success', 'Data pasien berhasil diperbarui.');
-        redirect('pasien_admin');
-    }
+    $data_pendaftaran = [
+        'nama'              => $nama,
+        'tgl_lahir'         => $this->input->post('tgl_lahir'),
+        'alamat'            => $this->input->post('alamat'),
+        'no_hp'             => $this->input->post('no_hp'),
+        'keluhan'           => $this->input->post('keluhan'),
+        'tanggal_kunjungan' => $this->input->post('tanggal_kunjungan'),
+        'jam_kunjungan'     => $this->input->post('jam_kunjungan'),
+        'dokter_id'         => $this->input->post('dokter_id')
+    ];
+
+    // Update tabel pendaftaran
+    $this->Pendaftaran_model->update($id, $data_pendaftaran);
+
+    // Ambil user_id dari pendaftaran
+    $pendaftaran = $this->Pendaftaran_model->get_by_id($id);
+    $user_id = $pendaftaran->user_id;
+
+    // Update juga nama di tabel users
+    $this->load->model('User_model'); // pastikan model di-load
+    $this->User_model->update_user($user_id, ['nama' => $nama]);
+
+    $this->session->set_flashdata('success', 'Data pasien berhasil diperbarui.');
+    redirect('pasien_admin');
+}
+
 
     public function delete($id) {
         $this->User_model->delete_user($id);
